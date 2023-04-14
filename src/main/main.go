@@ -43,6 +43,17 @@ func testPrivate() {
 
 	year := today.Year()
 	fmt.Println(year)
+
+	fmt.Println("-----------------")
+
+	event := mystruct.Event{}
+	err = event.SetYear(2023)
+	println(event.Year())
+	err = event.SetTitle("中国共产主义万岁")
+	if err != nil {
+		log.Fatal(err)
+	}
+	println(event.Title())
 }
 
 // 测试方法传指针修改值

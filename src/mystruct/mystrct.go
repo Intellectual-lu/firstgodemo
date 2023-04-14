@@ -1,6 +1,9 @@
 package mystruct
 
-import "errors"
+import (
+	"errors"
+	"unicode/utf8"
+)
 
 type MyStruct struct {
 	Name   string
@@ -12,6 +15,11 @@ type Date struct {
 	year  int
 	month int
 	day   int
+}
+
+type Event struct {
+	title string
+	Date
 }
 
 // SetYear set方法
@@ -37,6 +45,14 @@ func (d *Date) SetDay(day int) error {
 	return nil
 }
 
+func (e *Event) SetTitle(title string) error {
+	if utf8.RuneCountInString(title) > 9 {
+		return errors.New("title must less five")
+	}
+	e.title = title
+	return nil
+}
+
 // Year get方法
 func (d *Date) Year() int {
 	return d.year
@@ -48,4 +64,8 @@ func (d *Date) Month() int {
 
 func (d *Date) Day() int {
 	return d.day
+}
+
+func (e *Event) Title() string {
+	return e.title
 }
